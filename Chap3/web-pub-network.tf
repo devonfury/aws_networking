@@ -60,8 +60,8 @@ resource "aws_security_group" "web-pub-sg" {
   }
   egress {
     description = "ICMP-Out"
-    from_port = "*"
-    to_port = "*"
+    from_port = -1
+    to_port = -1
     protocol = "ICMP"
     cidr_blocks = ["0.0.0.0/0"]
   }
