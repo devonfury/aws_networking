@@ -30,3 +30,15 @@ resource "aws_eip_association" "web-pub" {
   allocation_id = aws_eip.web-pub.id
   private_ip_address = "10.1.254.10"
 }
+
+output "ec2_instance_private_ip_address" {
+  value = aws_instance.www1.private_ip
+}
+
+output "ec2_instance_public_ip_address" {
+  value = aws_instance.www1.public_ip
+}
+
+output "ec2_instance_instance_id" {
+  value = aws_instance.www1.id
+}
