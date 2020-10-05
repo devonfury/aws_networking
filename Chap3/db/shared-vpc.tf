@@ -1,7 +1,3 @@
-provider "aws" {    
-  region = "us-east-2" 
-}
-
 resource "aws_vpc" "shared" {
   cidr_block = "10.2.0.0/16"
   tags = {
