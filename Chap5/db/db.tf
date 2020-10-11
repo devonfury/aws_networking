@@ -1,6 +1,9 @@
+variable "shared_vpc_id" {}
+variable "db_subnet" {}
+
 resource "aws_security_group" "db1-sg" {
   name = "db1-sg"
-  vpc_id = aws_vpc.shared.id
+  vpc_id = var.shared_vpc_id #aws_vpc.shared.id
   ingress {
     description = "SSH-In"
     from_port = 22
@@ -35,7 +38,7 @@ resource "aws_security_group" "db1-sg" {
 }
 
 resource "aws_network_interface" "db1" {
-  subnet_id = aws_subnet.database.id
+  subnet_id = var.db_subnet #aws_subnet.database.id
   private_ips = ["10.2.2.41"]
   security_groups = [aws_security_group.db1-sg.id]  
   tags = {
