@@ -52,7 +52,7 @@ resource "aws_security_group" "nat-instance-sg" {
 }
 resource "aws_network_interface" "nat-ec2-instance" {
   subnet_id = aws_subnet.nat-pub.id
-  private_ips = ["10.2.2.254"]
+  private_ips = ["10.2.254.254"]
   security_groups = [aws_security_group.nat-instance-sg.id]  
   tags = {
     Name = "nat-ec2-instance eth0"
