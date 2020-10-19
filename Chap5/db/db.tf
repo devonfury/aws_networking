@@ -23,7 +23,7 @@ resource "aws_security_group" "db1-sg" {
     from_port = -1
     to_port = -1
     protocol = "ICMP"
-    cidr_blocks = ["10.1.254.0/24"]
+    cidr_blocks = ["10.1.254.0/24","10.2.0.0/16"]
   }
   egress {
     description = "ICMP-Out"

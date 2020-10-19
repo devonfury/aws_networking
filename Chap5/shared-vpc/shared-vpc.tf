@@ -16,10 +16,10 @@ resource "aws_subnet" "database" {
 
 resource "aws_route_table" "shared" {
   vpc_id = aws_vpc.shared.id  
-#   route {
-#     cidr_block = "0.0.0.0/0"
-#     gateway_id = aws_internet_gateway.web-igw.id
-#   }  
+  /* route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.web-igw.id
+  }  */ 
   tags = {
     Name = "shared-vpc-route-table"
   }

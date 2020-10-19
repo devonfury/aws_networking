@@ -42,6 +42,12 @@ resource "aws_route" "shared_vpc-to-web_vpc" {
   vpc_peering_connection_id = aws_vpc_peering_connection.web_vpc-shared_vpc-pcx.id
 }
 
+resource "aws_route" "shared_vpc-default_route" {
+  route_table_id = module.shared-vpc.shared_vpc_route_table_id 
+  destination_cidr_block = "0.0.0.0/0"
+  instance_id = module.nat.nat_ec2_instance_id
+}
+
 output "web-shared_pcx_id" {
   value = aws_vpc_peering_connection.web_vpc-shared_vpc-pcx.id
   description = "web to shared vpc pcx id"

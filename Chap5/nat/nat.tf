@@ -49,6 +49,20 @@ resource "aws_security_group" "nat-instance-sg" {
     protocol = "TCP"
     cidr_blocks = ["10.0.0.0/8","192.168.0.0/16"]
   }
+  ingress {
+    description = "ICMP-In"
+    from_port = -1
+    to_port = -1
+    protocol = "ICMP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    description = "ICMP-Out"
+    from_port = -1
+    to_port = -1
+    protocol = "ICMP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }  
 }
 resource "aws_network_interface" "nat-ec2-instance" {
   subnet_id = aws_subnet.nat-pub.id
@@ -68,7 +82,7 @@ resource "aws_instance" "nat-ec2-instance" {
     network_interface_id = aws_network_interface.nat-ec2-instance.id 
     device_index = 0    
   }
-  source_dest_check = false
+  #source_dest_check = false
   tags = {
     Name = "nat-ec2-instance"
   }
@@ -76,4 +90,10 @@ resource "aws_instance" "nat-ec2-instance" {
 
 resource "aws_eip" "nat-instance-eip" {
   instance = aws_instance.nat-ec2-instance.id
+  associate_with_private_ip = "10.2.254.254"
+}
+
+output "nat_ec2_instance_id" {
+  value = aws_instance.nat-ec2-instance.id
+  description = "nat ec2 instance id"
 }
